@@ -1,0 +1,24 @@
+# Do not copy local environments or source control
+.git
+.gitignore
+.venv
+venv/
+env/
+.env
+
+# Do not copy local database files
+db.sqlite3
+*.db
+media/
+
+# Do not copy python artifacts
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignore local configuration files
+.vscode/
+.idea/
+docker-compose.yml
+docker-compose.override.yml
+Dockerfile
