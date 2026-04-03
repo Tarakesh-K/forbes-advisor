@@ -31,6 +31,21 @@ The fastest way to get the stack running with all dependencies (PostgreSQL, Redi
 
 ---
 
+## 🤖 AI Disclosure & Methodology
+
+In alignment with the assessment requirements, this project utilized AI collaboration to accelerate development velocity while maintaining senior-level architectural oversight.
+
+* **Tools Used**: Gemini 1.5 Pro, ChatGPT (GPT-4o), and Claude 3.5 Sonnet.
+* **Role of AI**: 
+    * **Boilerplate & Templates**: AI was used to generate initial scaffoldings for the `Makefile`, Docker Compose configurations, and standard Django management command templates.
+    * **Documentation Shells**: Initial drafts for `TESTING.md` and `DECISIONS.md` were generated to ensure comprehensive coverage of industry standards.
+* **Human Oversight (The "Senior" Layer)**:
+    * **System Architecture**: The high-level design—including the choice of Celery for async processing, Redis for the caching layer, and the specific database indexing strategy—was architected entirely by the developer.
+    * **Logic Refinement**: AI-generated code was manually audited and heavily edited to implement specific business logic, such as the `JSONB` audit trail for raw responses and the specialized Parquet chunking strategy to prevent OOM (Out of Memory) errors during 1M-row ingestion.
+    * **Networking & Integration**: Debugging cross-container communication and ensuring strict DRF permission classes were handled manually to ensure production-grade security.
+
+---
+
 ## 🛠️ Operational Commands
 
 Use the `Makefile` to simplify common development tasks.
@@ -59,10 +74,9 @@ Use the `Makefile` to simplify common development tasks.
 
 ## 🗄️ Documentation & Standards
 
-To understand the engineering judgment behind this implementation:
-
-1.  **[schema.md](schema.md)**: Database indexing strategy, choice of `DecimalField` for precision, and audit trail design.
-2.  **[DECISIONS.md](DECISIONS.md)**: Rationale for Celery, Redis caching strategy, and handling 1M row idempotency.
+1.  **[schema.md](schema.md)**: Database indexing strategy and audit trail design.
+2.  **[DECISIONS.md](DECISIONS.md)**: Rationale for Celery, Redis, and idempotency.
+3.  **[TESTING.md](TESTING.md)**: Pytest strategy and mocking details.
 
 ---
 
@@ -72,7 +86,7 @@ Configure these in your `.env` file:
 
 * `POSTGRES_PASSWORD`: Database authentication.
 * `SECRET_KEY`: Django security key.
-* `CELERY_BROKER_URL`: Connection string for Redis (`redis://redis:6379/0`).
+* `CELERY_BROKER_URL`: Connection string for Redis.
 * `NEXT_PUBLIC_API_URL`: Backend endpoint for the frontend.
 
 ---
